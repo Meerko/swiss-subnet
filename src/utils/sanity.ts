@@ -21,16 +21,72 @@ export async function getPost(slug: string): Promise<Post> {
 export async function getHomepage() {
   return await sanityClient.fetch(groq`*[_type == "homepage"][0] {
     heroSection{
-    headline,
-    subHeadline,
-    mainImage{
+      headline,
+      subHeadline,
+      mainImage{
         asset->{
           url,
           metadata { lqip, dimensions }
         }
-     }
+      }
+    },
+    aboutSection {
+      title,
+      text,
+      data[]
+    },
+    featuresSection {
+      title,
+      headline,
+      cards[] {
+        icon{
+        asset->{
+            url
+          }
+        },
+        title,
+        text
+      }
+    },
+    subnetSection {
+    title,
+    cards[]{
+        title,
+        text,
+        link
+      }
+    },
+    nftSection {
+      title,
+      headline,
+      text,
+      ascii{
+        asset->{
+            url
+          }
+        },
+    },
+    newsSection {
+      title,
+      headline,
+      news[]->{
+        title,
+        excerpt,
+        mainImage{
+          asset->{
+            url,
+            metadata { lqip, dimensions }
+          }
+        }
+      }
+    },
+    contactSection {
+      title,
+      headline,
+      text,
+      data[]
     }
-}`);
+  }`);
 }
 
 export interface Post {

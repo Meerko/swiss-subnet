@@ -1,32 +1,178 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import { getHomepage } from "../utils/sanity";
-import AsciiArtGenerator from "../components/Ascii.astro";
-
+import { PortableText } from "astro-portabletext";
+import "../globals.css";
+import Marquee from "../components/Marquee.astro";
 const homepage = await getHomepage();
+console.log(homepage);
 ---
 
 <Layout>
-  {
-    homepage.heroSection && (
-      <section class="container mx-auto px-8 flex flex-col justify-center min-h-screen">
+  <div class="flex flex-col gap-40 md:gap-48">
+    {
+      homepage.heroSection && (
         <div>
-          <h1 class="text-7xl mb-8">{homepage.heroSection.headline}</h1>
-          <h2 class="text-xl max-w-xl">{homepage.heroSection.subHeadline}</h2>
-        </div>
+          <section class="container mx-auto px-4 md:px-8 flex flex-col md:justify-center min-h-screen py-24">
+            <div class="relative z-5">
+              <h1 class="t-0 md:text-9xl  tracking-tighter mb-8 max-w-xl leading-[.9]">
+                {homepage.heroSection.headline}
+              </h1>
+              <h2 class="md:text-2xl max-w-lg">
+                {homepage.heroSection.subHeadline}
+              </h2>
+            </div>
+            {homepage.heroSection.mainImage && (
+              <Image
+                src={homepage.heroSection.mainImage.asset.url}
+                height={200}
+                width={200}
+                alt={homepage.heroSection.mainImage.alt ?? ""}
+                class="w-full md:w-2/3 h-1/2 md:h-auto object-contain object-right max-h-screen absolute bottom-0 right-0"
+              />
+            )}
+          </section>
 
-        <AsciiArtGenerator imageUrl={homepage.heroSection.mainImage} />
-      </section>
-    )
-  }
-  {
-    homepage.aboutSection && (
-      <section class="container mx-auto px-8 flex flex-col justify-center min-h-screen">
-        <div>
-          <h3 class="border border-black">About</h3>
-          <p class="text-7xl mb-8">{homepage.aboutSection.text}</p>
+          <Marquee className="bg-black text-white">
+            <span class="mono mx-2">Discover the subnet &nbsp;↓</span>
+          </Marquee>
         </div>
-      </section>
-    )
-  }
+      )
+    }
+
+    {
+      homepage.aboutSection && (
+        <section class="container mx-auto px-4 md:px-8 flex flex-col justify-center">
+          <div class="flex flex-col items-start gap-4">
+            <h3 class="mono  border-2 border-black rounded-full py-1 px-2 table">
+              {homepage.aboutSection.title}
+            </h3>
+            <div class="t-1 font-[500] max-w-7xl">
+              <PortableText value={homepage.aboutSection.text} />
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      homepage.featuresSection && (
+        <section class="grid gap-8">
+          <div class="container mx-auto grid md:grid-cols-2 gap-x-8 px-4 md:px-8 ">
+            <div />
+            <div class="flex flex-col items-start gap-4">
+              <h3 class="mono  border-2 border-black rounded-full py-1 px-2 table">
+                {homepage.featuresSection.title}
+              </h3>
+              <h4 class="t-1 font-[500]">
+                {homepage.featuresSection.headline}
+              </h4>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4">
+            {homepage.featuresSection.cards.map((card: any, index: number) => (
+              <div
+                class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-8 ${index % 2 === 0 ? "lg:bg-zinc-200/60" : "lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "bg-zinc-200/60" : "bg-zinc-200/30"}`}
+              >
+                <Image
+                  src={card.icon.asset.url}
+                  height={200}
+                  width={200}
+                  alt=""
+                  class="w-24 h-24 object-contain"
+                />
+                <div>
+                  <span class="mono flex gap-2 items-center">
+                    <span class="bg-primary w-2 h-2 block" />
+                    {(index + 1).toLocaleString("en-US", {
+                      minimumIntegerDigits: 2,
+                      useGrouping: false,
+                    })}
+                  </span>
+                  <h3 class="t-2 mt-2">{card.title}</h3>
+
+                  <p class="opacity-70 text-lg  mt-4">{card.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      homepage.subnetSection && (
+        <section class=" grid gap-4">
+          <Marquee>
+            <span class="mono mx-2 flex items-center gap-2">
+              The subnet&nbsp;
+              <span class="bg-primary w-2 h-2 block" />
+            </span>
+          </Marquee>
+
+          <div class="grid">
+            {homepage.subnetSection.cards.map((card: any, index: number) => (
+              <div
+                class={`sticky bg-white border-t-2 border-black grid md:grid-cols-2 p-4 md:p-8`}
+              >
+                <div>
+                  <span class="hidden md:block mono flex gap-2 items-center">
+                    {(index + 1).toLocaleString("en-US", {
+                      minimumIntegerDigits: 2,
+                      useGrouping: false,
+                    })}
+                  </span>
+                </div>
+                <div>
+                  <h3 class="t-1">{card.title}</h3>
+                  <p class="opacity-70 text-xl max-w-lg mt-4">{card.text}</p>
+                  {card.link && card.link.type === "file" ? (
+                    <a
+                      href={card.link.file.url}
+                      class="flex items-center mono mt-4"
+                    >
+                      <span class="border-2 border-black rounded-full py-1 px-2">
+                        Download
+                      </span>
+                      <span class="border-2 border-black rounded-full py-1 px-2">
+                        ↗
+                      </span>
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      homepage.nftSection && (
+        <section class="bg-zinc-200/50 ">
+          <div class="grid md:grid-cols-2 gap-16 container mx-auto px-4 md:px-8 items-center py-16">
+            <div class="flex flex-col items-start gap-4">
+              <Image
+                src={homepage.nftSection.ascii.asset.url}
+                height={500}
+                width={500}
+                alt=""
+                class="w-full h-full object-contain max-w-96 md:max-w-none mx-auto"
+              />
+            </div>
+            <div class="flex flex-col items-start gap-4">
+              <h3 class="mono  border-2 border-black rounded-full py-1 px-2 table">
+                {homepage.nftSection.title}
+              </h3>
+              <h4 class="t-1 font-[500]">{homepage.nftSection.headline}</h4>
+              <p class="opacity-70 text-xl mt-4 max-w-lg">
+                {homepage.nftSection.text}
+              </p>
+            </div>
+          </div>
+        </section>
+      )
+    }
+  </div>
 </Layout>

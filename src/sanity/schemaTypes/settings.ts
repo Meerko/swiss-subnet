@@ -21,14 +21,7 @@ export const settingsType = defineType({
       ],
     }),
 
-    defineField({
-      name: "publishedAt",
-      type: "datetime",
-    }),
-    defineField({
-      name: "body",
-      type: "blockContent",
-    }),
+    { name: "whitePaper", type: "file" },
   ],
 
   preview: {
