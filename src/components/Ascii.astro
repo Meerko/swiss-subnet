@@ -1,0 +1,21 @@
+---
+import React, { useEffect, useState } from "react";
+import getAsciiImage from "get-ascii-image";
+
+const asciiArt = async function generateAscii(imageUrl: string) {
+  console.log("jnkv", imageUrl);
+  try {
+    const art = await getAsciiImage(imageUrl, {
+      maxWidth: 200,
+      maxHeight: 200,
+    });
+
+    console.log(art);
+  } catch (error) {
+    console.error("Error generating ASCII art:", error);
+  }
+};
+---
+
+<pre
+  class="font-mono text-xs">{asciiArt("https://cdn.sanity.io/images/4jobao9y/production/e9d21b7b57a0af6dea10296adbfce06183cc09e3-1242x626.png")}</pre>;
