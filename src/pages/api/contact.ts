@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const mailOptions: Mail.Options = {
     from: import.meta.env.USER_MAIL,
-    to: "hello@grg-bgn.site",
+    to: import.meta.env.USER_MAIL,
     //cc: email,
     subject: `Swiss Subnet — Contact request from ${name} (${email})`,
     text: `
