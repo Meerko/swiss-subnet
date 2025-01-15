@@ -11,7 +11,27 @@ export async function getPosts(): Promise<Post[]> {
 
 export async function getPost(slug: string): Promise<Post> {
   return await sanityClient.fetch(
-    groq`*[_type == "post" && slug.current == $slug][0]`,
+    groq`*[_type == "post" && slug.current == $slug][0]{
+    title, 
+    _createdAt,
+    body,
+    mainImage,
+    link {
+          type,
+          title,
+          url,
+          reference->{
+            _type,
+            title,
+            slug
+          },
+          file {
+            asset->{
+              url
+            }
+          }
+        }
+    }`,
     {
       slug,
     }
@@ -54,18 +74,19 @@ export async function getHomepage() {
         title,
         text,
         link {
-        type,
-        url,
-        reference->{
-          _type,
+          type,
           title,
-          slug
-        },
-        file {
-          asset->{
-            url
+          url,
+          reference->{
+            _type,
+            title,
+            slug
+          },
+          file {
+            asset->{
+              url
+            }
           }
-        }
         }
       }
     },
@@ -111,4 +132,18 @@ export interface Post {
   excerpt?: string;
   mainImage?: ImageAsset & { alt?: string };
   body: PortableTextBlock[];
+  link: {
+    type: "url" | "reference" | "file";
+    url?: string;
+    reference?: {
+      _type: "page";
+      title: string;
+      slug: Slug;
+    };
+    file?: {
+      asset: {
+        url: string;
+      };
+    };
+  };
 }

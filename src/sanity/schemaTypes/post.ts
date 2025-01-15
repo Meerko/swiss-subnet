@@ -1,5 +1,6 @@
 // ./src/sanity/schemaTypes/post.ts
 import { defineField, defineType } from "sanity";
+import { link } from "./link";
 
 export const postType = defineType({
   name: "post",
@@ -45,6 +46,7 @@ export const postType = defineType({
       name: "body",
       type: "blockContent",
     }),
+    link,
   ],
 
   preview: {

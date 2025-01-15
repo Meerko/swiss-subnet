@@ -6,6 +6,7 @@ import { formatDate } from "../../utils";
 import { urlFor } from "../../utils/image";
 import { getPost, getPosts } from "../../utils/sanity";
 import "../../globals.css";
+import Link from "../../components/Link";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -40,17 +41,20 @@ const post = await getPost(slug);
           <div class="post__cover--none" />
         )
       }
-      <div class="p-4 md:p-6 text-xl max-w-3xl text-pretty portable-text">
+      <div
+        class="p-4 md:p-6 text-xl max-w-3xl text-pretty portable-text flex flex-col items-start"
+      >
         <PortableText value={post.body} />
+        <Link link={post.link} />
       </div>
     </div>
-  </section>
-</Layout>
 
-<style>
-  .portable-text h3 {
-    @apply text-2xl;
-    @aaply font-bold;
-    font-size: 40px;
-  }
-</style>
+    <style>
+      .portable-text h3 {
+        @apply text-2xl;
+        @aaply font-bold;
+        font-size: 40px;
+      }
+    </style>
+  </section></Layout
+>
