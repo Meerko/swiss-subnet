@@ -1,0 +1,97 @@
+---
+import { PortableText } from "astro-portabletext";
+
+const { data } = Astro.props;
+---
+
+<section
+  class="container mx-auto px-4 md:px-8 grid md:grid-cols-3 lg:grid-cols-4 gap-8"
+>
+  <div class="flex flex-col items-start gap-4 md:col-span-2 lg:col-span-3">
+    <h3 class="pill">{data.title}</h3>
+    <div class="t-1 font-[500] max-w-7xl">
+      <PortableText value={data.text} />
+    </div>
+  </div>
+  <div class="flex flex-col gap-4">
+    {
+      data.data.map((card: any, index: number) => (
+        <div
+          class={`card overflow-hidden bg-zinc-200/60 ${index === 0 ? "initial" : ""}`}
+          data-index={index}
+        >
+          <div class="flex flex-col justify-between gap-4 min-h-80 h-full">
+            <div>
+              <div class="progress-container overflow-hidden bg-zinc-300 relative h-1 transition-all">
+                <div class="progress-bar bg-primary h-1 transition-all duration-[3000ms] w-0" />
+              </div>
+              <span class="mono p-4 block">
+                {index + 1} / {data.data.length}
+              </span>
+            </div>
+            <div class="p-4">
+              <span class="text-7xl font-medium mb-4 block">{card.number}</span>
+              <p>{card.text}</p>
+              <p class="opacity-60">{card.subText}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".card");
+    let activeIndex = 0;
+
+    // Function to update the active class
+    const updateActiveClass = () => {
+      cards.forEach((card, index) => {
+        if (index === activeIndex) {
+          card.classList.add("active");
+        } else {
+          card.classList.remove("active");
+          card.classList.remove("initial");
+        }
+      });
+    };
+
+    updateActiveClass();
+
+    // Set up interval to change active index every 3 seconds
+    setInterval(() => {
+      activeIndex = (activeIndex + 1) % cards.length;
+      updateActiveClass();
+    }, 3000);
+  });
+</script>
+
+<style>
+  .card {
+    max-height: 1rem;
+    overflow: hidden;
+    transition: all 1s;
+    height: 20rem;
+  }
+  .card .progress-bar {
+    width: 0;
+    transition: width 3s ease-in-out;
+  }
+  .card .progress-container {
+    height: 0px;
+  }
+  .active,
+  .initial {
+    max-height: 20rem;
+  }
+  .active .progress-bar {
+    width: 100%;
+    transition: width 3s ease-in-out;
+  }
+  .active .progress-container,
+  .initial .progress-container {
+    height: 4px;
+  }
+</style>

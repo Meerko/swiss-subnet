@@ -3,12 +3,14 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm";
 import { getHomepage } from "../utils/sanity";
-import { PortableText } from "astro-portabletext";
 import "../globals.css";
 import Marquee from "../components/Marquee.astro";
-import { formatDate } from "../utils";
+import SectionAbout from "../components/SectionAbout.astro";
+import SectionCards from "../components/SectionCards.astro";
+import SectionRows from "../components/SectionRows.astro";
+import SectionNews from "../components/SectionNews.astro";
+import SectionTextImage from "../components/SectionTextImage.astro";
 const homepage = await getHomepage();
-console.log(homepage.newsSection.news[0]);
 ---
 
 <Layout>
@@ -46,172 +48,18 @@ console.log(homepage.newsSection.news[0]);
       )
     }
 
-    {
-      homepage.aboutSection && (
-        <section class="container mx-auto px-4 md:px-8 flex flex-col justify-center">
-          <div class="flex flex-col items-start gap-4">
-            <h3 class="pill">{homepage.aboutSection.title}</h3>
-            <div class="t-1 font-[500] max-w-7xl">
-              <PortableText value={homepage.aboutSection.text} />
-            </div>
-          </div>
-        </section>
-      )
-    }
+    {homepage.aboutSection && <SectionAbout data={homepage.aboutSection} />}
 
     {
       homepage.featuresSection && (
-        <section class="grid gap-8">
-          <div class="container mx-auto grid md:grid-cols-2 gap-x-8 px-4 md:px-8 ">
-            <div />
-            <div class="flex flex-col items-start gap-4">
-              <h3 class="pill">{homepage.featuresSection.title}</h3>
-              <h4 class="t-1 font-[500]">
-                {homepage.featuresSection.headline}
-              </h4>
-            </div>
-          </div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4">
-            {homepage.featuresSection.cards.map((card: any, index: number) => (
-              <div
-                class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-8 ${index % 2 === 0 ? "bg-zinc-200/60 lg:bg-zinc-200/60" : "bg-zinc-200/30 lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "sm:bg-zinc-200/60" : "sm:bg-zinc-200/30"}`}
-              >
-                <Image
-                  src={card.icon.asset.url}
-                  height={200}
-                  width={200}
-                  alt=""
-                  class="w-24 h-24 object-contain"
-                />
-                <div>
-                  <span class="mono flex gap-2 items-center">
-                    <span class="bg-primary w-2 h-2 block" />
-                    {(index + 1).toLocaleString("en-US", {
-                      minimumIntegerDigits: 2,
-                      useGrouping: false,
-                    })}
-                  </span>
-                  <h3 class="t-2 mt-2">{card.title}</h3>
-
-                  <p class="opacity-70 text-lg  mt-4">{card.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <SectionCards data={homepage.featuresSection} />
       )
     }
 
-    {
-      homepage.subnetSection && (
-        <section class=" grid gap-4">
-          <Marquee>
-            <span class="mono mx-2 flex items-center gap-2">
-              The subnet&nbsp;
-              <span class="bg-primary w-2 h-2 block" />
-            </span>
-          </Marquee>
+    {homepage.subnetSection && <SectionRows data={homepage.subnetSection} />}
 
-          <div class="grid">
-            {homepage.subnetSection.cards.map((card: any, index: number) => (
-              <div
-                class={`sticky bg-white border-t-2 border-black grid md:grid-cols-2 p-4 md:p-8`}
-              >
-                <div>
-                  <span class="hidden md:block mono flex gap-2 items-center">
-                    {(index + 1).toLocaleString("en-US", {
-                      minimumIntegerDigits: 2,
-                      useGrouping: false,
-                    })}
-                  </span>
-                </div>
-                <div class="flex flex-col items-start">
-                  <h3 class="t-1">{card.title}</h3>
-                  <p class="opacity-70 text-xl max-w-lg mt-4">{card.text}</p>
-                  {card.link && card.link.type === "file" ? (
-                    <a
-                      href={card.link.file.asset.url}
-                      target="_blank"
-                      class="mt-4 pill btn btn-external"
-                    >
-                      Learn more
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )
-    }
-
-    {
-      homepage.nftSection && (
-        <section class="bg-zinc-200/50 ">
-          <div class="grid md:grid-cols-2 gap-16 container mx-auto px-4 md:px-8 items-center py-16">
-            <div class="flex flex-col items-start gap-4">
-              <Image
-                src={homepage.nftSection.ascii.asset.url}
-                height={500}
-                width={500}
-                alt=""
-                class="w-full h-full object-contain max-w-96 md:max-w-none mx-auto"
-              />
-            </div>
-            <div class="flex flex-col items-start gap-4">
-              <h3 class="pill">{homepage.nftSection.title}</h3>
-              <h4 class="t-1 font-[500]">{homepage.nftSection.headline}</h4>
-              <p class="opacity-70 text-xl mt-4 max-w-lg">
-                {homepage.nftSection.text}
-              </p>
-            </div>
-          </div>
-        </section>
-      )
-    }
-    {
-      homepage.newsSection && (
-        <section class="grid gap-8">
-          <div class="grid md:grid-cols-2 gap-x-8">
-            <div class="flex flex-col items-start gap-4 px-4 md:px-8">
-              <h3 class="pill">{homepage.newsSection.title}</h3>
-              <h4 class="t-1 font-[500]">{homepage.newsSection.headline}</h4>
-            </div>
-          </div>
-          <div class="flex flex-col items-start gap-4">
-            {homepage.newsSection.news.map((post: any, index: number) => (
-              <a
-                href={`/news/${post.slug.current}`}
-                class="w-full grid sm:grid-cols-2 lg:grid-cols-4 border-y-2 border-black group"
-              >
-                <div class="overflow-hidden">
-                  <Image
-                    src={post.mainImage?.asset.url}
-                    height={500}
-                    width={500}
-                    alt=""
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                  />
-                </div>
-                <div class="p-4 md:p-8 lg:col-span-3 grid lg:grid-cols-3 gap-y-4">
-                  <div class="flex flex-col justify-between gap-4 md:col-span-2">
-                    <h5 class="t-2 max-w-sm">{post.title}</h5>
-                    <p class="mono flex items-center gap-2">
-                      <span class="bg-primary w-2 h-2 block" />
-                      {formatDate(post.publishedAt)}
-                    </p>
-                  </div>
-                  <div class="flex flex-col justify-between gap-4 items-start">
-                    <p class="opacity-70 text-lg">{post.excerpt}</p>
-                    <span class="pill btn">Read article</span>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
-      )
-    }
+    {homepage.nftSection && <SectionTextImage data={homepage.nftSection} />}
+    {homepage.newsSection && <SectionNews data={homepage.newsSection} />}
     {
       homepage.contactSection && (
         <section

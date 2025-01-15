@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+
+const { data } = Astro.props;
+---
+
+<section class="grid gap-8">
+  <div class="container mx-auto grid md:grid-cols-2 gap-x-8 px-4 md:px-8">
+    <div></div>
+    <div class="flex flex-col items-start gap-4">
+      <h3 class="pill">{data.title}</h3>
+      <h4 class="t-1 font-[500]">
+        {data.headline}
+      </h4>
+    </div>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+    {
+      data.cards.map((card: any, index: number) => (
+        <div
+          class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-8 ${index % 2 === 0 ? "bg-zinc-200/60 lg:bg-zinc-200/60" : "bg-zinc-200/30 lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "sm:bg-zinc-200/60" : "sm:bg-zinc-200/30"}`}
+        >
+          <Image
+            src={card.icon.asset.url}
+            height={200}
+            width={200}
+            alt=""
+            class="w-24 h-24 object-contain"
+          />
+          <div>
+            <span class="mono flex gap-2 items-center">
+              <span class="bg-primary w-2 h-2 block" />
+              {(index + 1).toLocaleString("en-US", {
+                minimumIntegerDigits: 2,
+                useGrouping: false,
+              })}
+            </span>
+            <h3 class="t-2 mt-2">{card.title}</h3>
+
+            <p class="opacity-70 text-lg  mt-4">{card.text}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
