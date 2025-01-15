@@ -25,7 +25,7 @@ const POST = async ({ request }) => {
   });
   const mailOptions = {
     from: "giorgiabagnasco@gmail.com",
-    to: "hello@grg-bgn.site",
+    to: "giorgiabagnasco@gmail.com",
     //cc: email,
     subject: `Swiss Subnet — Contact request from ${name} (${email})`,
     text: `
@@ -43,7 +43,7 @@ const POST = async ({ request }) => {
   await transport.sendMail(mailOptions);
   return new Response(
     JSON.stringify({
-      message: "Success!"
+      message: "We receiver you email and will get back to you shortly."
     }),
     { status: 200 }
   );

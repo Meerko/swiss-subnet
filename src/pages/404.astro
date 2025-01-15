@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm";
+import { getHomepage } from "../utils/sanity";
+import { PortableText } from "astro-portabletext";
+import "../globals.css";
+import Marquee from "../components/Marquee.astro";
+const homepage = await getHomepage();
+console.log(homepage.subnetSection.cards[0].link);
+---
+
+<Layout>
+  <div
+    class="flex flex-col gap-40 md:gap-48 items-center justify-center min-h-screen p-4 md:p-8"
+  >
+    <div class="flex flex-col items-center gap-4">
+      <h1 class="mono text-center pill">404 error</h1>
+      <h2 class="t-1 text-center">This page doesn't exist</h2>
+    </div>
+  </div>
+</Layout>
