@@ -241,8 +241,12 @@ export const homepageType = defineType({
       type: "object",
       fields: [
         {
-          name: "asciiTitle",
-          type: "text",
+          name: "title",
+          type: "string",
+        },
+        {
+          name: "headline",
+          type: "string",
         },
         {
           name: "text",

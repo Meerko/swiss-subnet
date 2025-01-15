@@ -48,3 +48,25 @@
     font-weight: 600;
     line-height: 1.2;
   }
+
+  .form-label {
+    font-family: "IBM Plex Mono", monospace;
+    @apply text-sm;
+    @apply uppercase;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .btn {
+    @apply bg-white;
+    @apply border-2;
+    @apply border-black;
+    @apply font-mono;
+    @apply py-2;
+    @apply px-4;
+    @apply rounded-full;
+    @apply text-sm;
+    @apply uppercase;
+    font-weight: 600;
+    line-height: 1.2;
+  }

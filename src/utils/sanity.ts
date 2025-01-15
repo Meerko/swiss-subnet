@@ -84,7 +84,6 @@ export async function getHomepage() {
       title,
       headline,
       text,
-      data[]
     }
   }`);
 }

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import ContactForm from "../components/ContactForm.astro";
+import ContactForm from "../components/ContactForm";
 import { getHomepage } from "../utils/sanity";
 import { PortableText } from "astro-portabletext";
 import "../globals.css";
@@ -9,6 +9,7 @@ import Marquee from "../components/Marquee.astro";
 const homepage = await getHomepage();
 console.log(homepage);
 ---
+
 <Layout>
   <div class="flex flex-col gap-40 md:gap-48">
     {
@@ -174,7 +175,18 @@ console.log(homepage);
         </section>
       )
     }
-
-    <ContactForm />
+    {
+      homepage.contactSection && (
+        <section class="text-center flex flex-col items-center gap-8">
+          <div>
+            <h4 class="t-1 font-[500]">{homepage.contactSection.headline}</h4>
+            <p class="opacity-70 text-xl mt-4 max-w-lg">
+              {homepage.contactSection.text}
+            </p>
+          </div>
+          <ContactForm client:load />
+        </section>
+      )
+    }
   </div>
 </Layout>
