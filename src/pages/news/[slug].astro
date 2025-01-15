@@ -21,28 +21,36 @@ const post = await getPost(slug);
 ---
 
 <Layout title={post.title!}>
-  <section class="post">
-    {
-      post.mainImage ? (
-        <img
-          class="post__cover"
-          src={urlFor(post.mainImage).url()}
-          alt="Cover image"
-        />
-      ) : (
-        <div class="post__cover--none" />
-      )
-    }
-    <div class="p-4 md:p-8 flex flex-col items-center">
-      <div class="mb-8 text-center">
+  <section class="mt-24">
+    <div class="flex flex-col items-center gap-8">
+      <div class="p-4 md:p-8 text-center flex flex-col items-center gap-2">
         <p class="mono mt-4">
           {formatDate(post._createdAt)}
         </p>
         <h1 class="t-1">{post.title}</h1>
       </div>
-      <div class="text-xl max-w-xl text-pretty">
+      {
+        post.mainImage ? (
+          <img
+            class="w-full max-h-96 md:max-h-[32rem] object-cover"
+            src={urlFor(post.mainImage).url()}
+            alt="Cover image"
+          />
+        ) : (
+          <div class="post__cover--none" />
+        )
+      }
+      <div class="p-4 md:p-8 text-xl max-w-3xl text-pretty portable-text">
         <PortableText value={post.body} />
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .portable-text h3 {
+    @apply text-2xl;
+    @aaply font-bold;
+    font-size: 40px;
+  }
+</style>

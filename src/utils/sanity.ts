@@ -85,6 +85,8 @@ export async function getHomepage() {
       news[]->{
         title,
         excerpt,
+        slug,
+        publishedAt,
         mainImage{
           asset->{
             url,

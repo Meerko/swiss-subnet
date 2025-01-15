@@ -6,8 +6,9 @@ import { getHomepage } from "../utils/sanity";
 import { PortableText } from "astro-portabletext";
 import "../globals.css";
 import Marquee from "../components/Marquee.astro";
+import { formatDate } from "../utils";
 const homepage = await getHomepage();
-console.log(homepage.subnetSection.cards[0].link);
+console.log(homepage.newsSection.news[0]);
 ---
 
 <Layout>
@@ -15,14 +16,17 @@ console.log(homepage.subnetSection.cards[0].link);
     {
       homepage.heroSection && (
         <div>
-          <section class="container mx-auto px-4 md:px-8 flex flex-col md:justify-center min-h-screen py-24">
-            <div class="relative z-5">
-              <h1 class="t-0 md:text-9xl  tracking-tighter mb-8 max-w-xl leading-[.9]">
+          <section class="container mx-auto px-4 md:px-8 flex flex-col md:justify-center min-h-screen py-32">
+            <div class="relative z-5 flex flex-col items-start gap-4">
+              <h1 class="t-0 md:text-9xl  tracking-tighter mb-4 max-w-xl leading-[.9]">
                 {homepage.heroSection.headline}
               </h1>
               <h2 class="md:text-2xl max-w-lg">
                 {homepage.heroSection.subHeadline}
               </h2>
+              <a href="#contact" class="btn pill">
+                Contact us
+              </a>
             </div>
             {homepage.heroSection.mainImage && (
               <Image
@@ -30,7 +34,7 @@ console.log(homepage.subnetSection.cards[0].link);
                 height={200}
                 width={200}
                 alt={homepage.heroSection.mainImage.alt ?? ""}
-                class="w-full md:w-2/3 h-1/2 md:h-auto object-contain object-right max-h-screen absolute bottom-0 right-0"
+                class="w-full md:w-2/3 h-1/2 md:h-auto object-contain object-right-bottom max-h-screen absolute bottom-0 right-0"
               />
             )}
           </section>
@@ -67,10 +71,10 @@ console.log(homepage.subnetSection.cards[0].link);
               </h4>
             </div>
           </div>
-          <div class="grid grid-cols-2 lg:grid-cols-4">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4">
             {homepage.featuresSection.cards.map((card: any, index: number) => (
               <div
-                class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-8 ${index % 2 === 0 ? "lg:bg-zinc-200/60" : "lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "bg-zinc-200/60" : "bg-zinc-200/30"}`}
+                class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-8 ${index % 2 === 0 ? "bg-zinc-200/60 lg:bg-zinc-200/60" : "bg-zinc-200/30 lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "sm:bg-zinc-200/60" : "sm:bg-zinc-200/30"}`}
               >
                 <Image
                   src={card.icon.asset.url}
@@ -166,9 +170,55 @@ console.log(homepage.subnetSection.cards[0].link);
       )
     }
     {
+      homepage.newsSection && (
+        <section class="grid gap-8">
+          <div class="grid md:grid-cols-2 gap-x-8">
+            <div class="flex flex-col items-start gap-4 px-4 md:px-8">
+              <h3 class="pill">{homepage.newsSection.title}</h3>
+              <h4 class="t-1 font-[500]">{homepage.newsSection.headline}</h4>
+            </div>
+          </div>
+          <div class="flex flex-col items-start gap-4">
+            {homepage.newsSection.news.map((post: any, index: number) => (
+              <a
+                href={`/news/${post.slug.current}`}
+                class="w-full grid sm:grid-cols-2 lg:grid-cols-4 border-y-2 border-black group"
+              >
+                <div class="overflow-hidden">
+                  <Image
+                    src={post.mainImage?.asset.url}
+                    height={500}
+                    width={500}
+                    alt=""
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  />
+                </div>
+                <div class="p-4 md:p-8 lg:col-span-3 grid lg:grid-cols-3 gap-y-4">
+                  <div class="flex flex-col justify-between gap-4 md:col-span-2">
+                    <h5 class="t-2 max-w-sm">{post.title}</h5>
+                    <p class="mono flex items-center gap-2">
+                      <span class="bg-primary w-2 h-2 block" />
+                      {formatDate(post.publishedAt)}
+                    </p>
+                  </div>
+                  <div class="flex flex-col justify-between gap-4 items-start">
+                    <p class="opacity-70 text-lg">{post.excerpt}</p>
+                    <span class="pill btn">Read article</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+    {
       homepage.contactSection && (
-        <section class="text-center flex flex-col items-center gap-8">
-          <div>
+        <section
+          id="contact"
+          class="text-center flex flex-col items-center gap-8 "
+        >
+          <div class="px-4 md:px-8">
             <h4 class="t-1 font-[500]">{homepage.contactSection.headline}</h4>
             <p class="opacity-70 text-xl mt-4 max-w-lg">
               {homepage.contactSection.text}
