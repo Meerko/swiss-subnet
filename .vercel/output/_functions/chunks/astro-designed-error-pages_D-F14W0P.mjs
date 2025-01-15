@@ -13,7 +13,7 @@ const ACTION_QUERY_PARAMS = {
   actionPayload: "_astroActionPayload"
 };
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": undefined, "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_ICP_INDEX_ID": "qhbym-qaaaa-aaaaa-aaafq-cai", "PUBLIC_ICP_LEDGER_ID": "ryjl3-tyaaa-aaaaa-aaaba-cai", "PUBLIC_INTERNET_IDENTITY_ID": "rdmx6-jaaaa-aaaaa-aaadq-cai", "PUBLIC_SATELLITE_ID": "gwank-kqaaa-aaaal-ar2cq-cai", "SITE": undefined, "SSR": true};
 const codeToStatusMap = {
   // Implemented from tRPC error code table
   // https://trpc.io/docs/server/error-handling#error-codes

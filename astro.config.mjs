@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
+import juno from "@junobuild/vite-plugin";
 import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
@@ -20,6 +21,8 @@ export default defineConfig({
     }),
     react(),
   ],
-  output: 'static',
-  adapter: vercel()
+  adapter: vercel(),
+  vite: {
+    plugins: [juno({ container: true })],
+  },
 });
