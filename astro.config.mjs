@@ -18,6 +18,5 @@ export default defineConfig({
       studioBasePath: "/studio",
     }),
     react(),
-  ],
-  output: 'static'
+  ]
 });
