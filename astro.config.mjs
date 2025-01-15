@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,5 +19,7 @@ export default defineConfig({
       studioBasePath: "/studio",
     }),
     react(),
-  ]
+  ],
+  output: 'static',
+  adapter: vercel(),
 });
