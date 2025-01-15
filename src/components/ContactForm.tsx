@@ -7,6 +7,14 @@ export default function ContactForm() {
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
+
+    // Honeypot validation: if the honeypot field is filled, don't submit
+    if (formData.get("honeypot")) {
+      setResponseMessage("Bot detected! Submission blocked.");
+      return;
+    }
+
+    // Proceed with the form submission
     const response = await fetch("/api/contact", {
       method: "POST",
       body: formData,
@@ -16,9 +24,11 @@ export default function ContactForm() {
       setResponseMessage(data.message);
     }
   }
+
   const labelClasses =
     "flex flex-col items-start p-4 focus-within:bg-zinc-200/80 w-full";
   const inputClasses = "bg-transparent focus:outline-none text-xl";
+
   return (
     <form
       onSubmit={submit}
@@ -28,6 +38,15 @@ export default function ContactForm() {
         <p className="text-center">{responseMessage}</p>
       ) : (
         <div className="flex flex-col items-center w-full">
+          {/* Honeypot Field */}
+          <input
+            type="text"
+            name="honeypot"
+            className="hidden"
+            tabIndex={-1} // Excludes from tab navigation
+            autoComplete="off"
+          />
+
           <label htmlFor="name" className={`${labelClasses} bg-zinc-200/60`}>
             <span className="form-label">Name</span>
             <input
