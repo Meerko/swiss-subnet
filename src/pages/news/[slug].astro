@@ -22,8 +22,8 @@ const post = await getPost(slug);
 
 <Layout title={post.title!}>
   <section class="mt-24">
-    <div class="flex flex-col items-center gap-8">
-      <div class="p-4 md:p-8 text-center flex flex-col items-center gap-2">
+    <div class="flex flex-col items-center gap-6">
+      <div class="p-4 md:p-6 text-center flex flex-col items-center gap-2">
         <p class="mono mt-4">
           {formatDate(post._createdAt)}
         </p>
@@ -40,7 +40,7 @@ const post = await getPost(slug);
           <div class="post__cover--none" />
         )
       }
-      <div class="p-4 md:p-8 text-xl max-w-3xl text-pretty portable-text">
+      <div class="p-4 md:p-6 text-xl max-w-3xl text-pretty portable-text">
         <PortableText value={post.body} />
       </div>
     </div>

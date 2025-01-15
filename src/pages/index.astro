@@ -18,7 +18,7 @@ const homepage = await getHomepage();
     {
       homepage.heroSection && (
         <div>
-          <section class="container mx-auto px-4 md:px-8 flex flex-col md:justify-center min-h-svh py-32 relative">
+          <section class="container mx-auto px-4 md:px-6 flex flex-col md:justify-center min-h-svh py-32 relative">
             <div class="relative z-5 flex flex-col items-start gap-4">
               <h1 class="t-0 md:text-9xl  tracking-tighter mb-4 max-w-xl leading-[.9]">
                 {homepage.heroSection.headline}
@@ -28,6 +28,7 @@ const homepage = await getHomepage();
               </h2>
               <a href="#contact" class="btn pill">
                 Contact us
+                <span />
               </a>
             </div>
             {homepage.heroSection.mainImage && (
@@ -42,7 +43,7 @@ const homepage = await getHomepage();
           </section>
 
           <Marquee className="bg-black text-white">
-            <span class="mono mx-2">Discover the subnet &nbsp;↓</span>
+            <span class="mono mx-2 py-1">Discover the subnet &nbsp;↓</span>
           </Marquee>
         </div>
       )
@@ -64,9 +65,9 @@ const homepage = await getHomepage();
       homepage.contactSection && (
         <section
           id="contact"
-          class="text-center flex flex-col items-center gap-8 "
+          class="text-center flex flex-col items-center gap-6 "
         >
-          <div class="px-4 md:px-8">
+          <div class="px-4 md:px-6">
             <h4 class="t-1 font-[500]">{homepage.contactSection.headline}</h4>
             <p class="opacity-70 text-xl mt-4 max-w-lg">
               {homepage.contactSection.text}

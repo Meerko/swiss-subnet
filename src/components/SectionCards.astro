@@ -4,8 +4,8 @@ import { Image } from "astro:assets";
 const { data } = Astro.props;
 ---
 
-<section class="grid gap-8">
-  <div class="container mx-auto grid md:grid-cols-2 gap-x-8 px-4 md:px-8">
+<section class="grid gap-6">
+  <div class="container mx-auto grid md:grid-cols-2 gap-x-8 px-4 md:px-6">
     <div></div>
     <div class="flex flex-col items-start gap-4">
       <h3 class="pill">{data.title}</h3>
@@ -18,7 +18,7 @@ const { data } = Astro.props;
     {
       data.cards.map((card: any, index: number) => (
         <div
-          class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-8 ${index % 2 === 0 ? "bg-zinc-200/60 lg:bg-zinc-200/60" : "bg-zinc-200/30 lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "sm:bg-zinc-200/60" : "sm:bg-zinc-200/30"}`}
+          class={`flex flex-col gap-16 lg:gap-24 p-4 md:p-6 ${index % 2 === 0 ? "bg-zinc-200/60 lg:bg-zinc-200/60" : "bg-zinc-200/30 lg:bg-zinc-200/30"} ${index === 0 || index === 3 ? "sm:bg-zinc-200/60" : "sm:bg-zinc-200/30"}`}
         >
           <Image
             src={card.icon.asset.url}

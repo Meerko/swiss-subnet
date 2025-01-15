@@ -79,7 +79,10 @@ export default function ContactForm() {
               required
             />
           </label>
-          <button className="pill btn mt-4">Send</button>
+          <button className="pill btn mt-4">
+            Send
+            <span />
+          </button>
         </div>
       )}
     </form>

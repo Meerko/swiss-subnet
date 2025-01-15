@@ -17,7 +17,7 @@ const { data } = Astro.props;
     {
       data.cards.map((card: any, index: number) => (
         <div
-          class={`sticky bg-white border-t-2 border-black grid md:grid-cols-2 p-4 md:p-8`}
+          class={`sticky bg-white border-t-2 border-black grid md:grid-cols-2 p-4 md:p-6`}
         >
           <div>
             <span class="hidden md:block mono flex gap-2 items-center">
@@ -37,6 +37,7 @@ const { data } = Astro.props;
                 class="mt-4 pill btn btn-external"
               >
                 Learn more
+                <span />
               </a>
             ) : null}
           </div>

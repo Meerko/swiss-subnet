@@ -5,9 +5,9 @@ import { formatDate } from "../utils";
 const { data } = Astro.props;
 ---
 
-<section class="grid gap-8">
+<section class="grid gap-6">
   <div class="grid md:grid-cols-2 gap-x-8">
-    <div class="flex flex-col items-start gap-4 px-4 md:px-8">
+    <div class="flex flex-col items-start gap-4 px-4 md:px-6">
       <h3 class="pill">{data.title}</h3>
       <h4 class="t-1 font-[500]">{data.headline}</h4>
     </div>
@@ -28,7 +28,7 @@ const { data } = Astro.props;
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
             />
           </div>
-          <div class="p-4 md:p-8 lg:col-span-3 grid lg:grid-cols-3 gap-y-4">
+          <div class="p-4 md:p-6 lg:col-span-3 grid lg:grid-cols-3 gap-y-4">
             <div class="flex flex-col justify-between gap-4 md:col-span-2">
               <h5 class="t-2 max-w-sm">{post.title}</h5>
               <p class="mono flex items-center gap-2">
@@ -38,7 +38,10 @@ const { data } = Astro.props;
             </div>
             <div class="flex flex-col justify-between gap-4 items-start">
               <p class="opacity-70 text-lg line-clamp-6">{post.excerpt}</p>
-              <span class="pill btn">Read article</span>
+              <span class="pill btn">
+                Read article
+                <span />
+              </span>
             </div>
           </div>
         </a>
