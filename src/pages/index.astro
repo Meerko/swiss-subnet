@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm.astro";
 import { getHomepage } from "../utils/sanity";
 import { PortableText } from "astro-portabletext";
 import "../globals.css";
@@ -174,5 +175,7 @@ console.log(homepage);
         </section>
       )
     }
+
+    <ContactForm />
   </div>
 </Layout>
