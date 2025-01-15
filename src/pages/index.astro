@@ -7,7 +7,7 @@ import { PortableText } from "astro-portabletext";
 import "../globals.css";
 import Marquee from "../components/Marquee.astro";
 const homepage = await getHomepage();
-console.log(homepage);
+console.log(homepage.subnetSection.cards[0].link);
 ---
 
 <Layout>
@@ -46,9 +46,7 @@ console.log(homepage);
       homepage.aboutSection && (
         <section class="container mx-auto px-4 md:px-8 flex flex-col justify-center">
           <div class="flex flex-col items-start gap-4">
-            <h3 class="mono  border-2 border-black rounded-full py-1 px-2 table">
-              {homepage.aboutSection.title}
-            </h3>
+            <h3 class="pill">{homepage.aboutSection.title}</h3>
             <div class="t-1 font-[500] max-w-7xl">
               <PortableText value={homepage.aboutSection.text} />
             </div>
@@ -63,9 +61,7 @@ console.log(homepage);
           <div class="container mx-auto grid md:grid-cols-2 gap-x-8 px-4 md:px-8 ">
             <div />
             <div class="flex flex-col items-start gap-4">
-              <h3 class="mono  border-2 border-black rounded-full py-1 px-2 table">
-                {homepage.featuresSection.title}
-              </h3>
+              <h3 class="pill">{homepage.featuresSection.title}</h3>
               <h4 class="t-1 font-[500]">
                 {homepage.featuresSection.headline}
               </h4>
@@ -125,20 +121,16 @@ console.log(homepage);
                     })}
                   </span>
                 </div>
-                <div>
+                <div class="flex flex-col items-start">
                   <h3 class="t-1">{card.title}</h3>
                   <p class="opacity-70 text-xl max-w-lg mt-4">{card.text}</p>
                   {card.link && card.link.type === "file" ? (
                     <a
-                      href={card.link.file.url}
-                      class="flex items-center mono mt-4"
+                      href={card.link.file.asset.url}
+                      target="_blank"
+                      class="mt-4 pill btn btn-external"
                     >
-                      <span class="border-2 border-black rounded-full py-1 px-2">
-                        Download
-                      </span>
-                      <span class="border-2 border-black rounded-full py-1 px-2">
-                        ↗
-                      </span>
+                      Learn more
                     </a>
                   ) : null}
                 </div>
@@ -163,9 +155,7 @@ console.log(homepage);
               />
             </div>
             <div class="flex flex-col items-start gap-4">
-              <h3 class="mono  border-2 border-black rounded-full py-1 px-2 table">
-                {homepage.nftSection.title}
-              </h3>
+              <h3 class="pill">{homepage.nftSection.title}</h3>
               <h4 class="t-1 font-[500]">{homepage.nftSection.headline}</h4>
               <p class="opacity-70 text-xl mt-4 max-w-lg">
                 {homepage.nftSection.text}

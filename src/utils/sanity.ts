@@ -53,7 +53,20 @@ export async function getHomepage() {
     cards[]{
         title,
         text,
-        link
+        link {
+        type,
+        url,
+        reference->{
+          _type,
+          title,
+          slug
+        },
+        file {
+          asset->{
+            url
+          }
+        }
+        }
       }
     },
     nftSection {

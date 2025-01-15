@@ -17,7 +17,7 @@ export default function ContactForm() {
     }
   }
   const labelClasses =
-    "flex flex-col items-start p-4 focus-within:bg-zinc-200/80";
+    "flex flex-col items-start p-4 focus-within:bg-zinc-200/80 w-full";
   const inputClasses = "bg-transparent focus:outline-none text-xl";
   return (
     <form
@@ -27,7 +27,7 @@ export default function ContactForm() {
       {responseMessage ? (
         <p className="text-center">{responseMessage}</p>
       ) : (
-        <div>
+        <div className="flex flex-col items-center w-full">
           <label htmlFor="name" className={`${labelClasses} bg-zinc-200/60`}>
             <span className="form-label">Name</span>
             <input
@@ -60,7 +60,7 @@ export default function ContactForm() {
               required
             />
           </label>
-          <button className="btn mt-4">Send</button>
+          <button className="pill btn mt-4">Send</button>
         </div>
       )}
     </form>

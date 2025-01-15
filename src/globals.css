@@ -57,8 +57,7 @@
     line-height: 1.2;
   }
 
-  .btn {
-    @apply bg-white;
+  .pill {
     @apply border-2;
     @apply border-black;
     @apply font-mono;
@@ -69,4 +68,31 @@
     @apply uppercase;
     font-weight: 600;
     line-height: 1.2;
+    display: flex;
+    align-items: center;
+    position: relative
+  }
+  .btn {
+    
+  }
+
+  .btn:after {
+    content: "→";
+    @apply border-2;
+    @apply border-black;
+    @apply text-sm;
+    @apply uppercase;
+    @apply font-mono;
+    @apply rounded-full;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: -2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .btn-external:after {
+    content: "↗";
   }
