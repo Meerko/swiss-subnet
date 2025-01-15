@@ -111,6 +111,7 @@
   }
   .btn span:before {
     left: -2rem;
+    @apply text-primary
   }
 
   .btn-external span:after, .btn-external span:before {
@@ -121,7 +122,7 @@
    transform: translateX(2rem)
   }
   .btn:hover span {
-    right: -2.2rem
+    right: -2.2rem;
   }
 
 

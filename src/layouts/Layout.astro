@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -11,6 +12,7 @@ import Footer from "../components/Footer.astro";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Swiss Subnet</title>
+    <ClientRouter />
   </head>
   <body>
     <Header />

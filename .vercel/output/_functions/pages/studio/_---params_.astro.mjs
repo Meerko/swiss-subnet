@@ -1,5 +1,5 @@
 import '../../chunks/page-ssr_CHb6PFzR.mjs';
-import { c as createComponent, r as renderTemplate, b as addAttribute, d as renderHead, a as renderComponent, e as createAstro } from '../../chunks/astro/server_DGjQ4oXc.mjs';
+import { c as createComponent, r as renderTemplate, b as addAttribute, d as renderHead, a as renderComponent, e as createAstro } from '../../chunks/astro/server_BfNg5vE5.mjs';
 import 'kleur/colors';
 /* empty css                                           */
 export { renderers } from '../../renderers.mjs';
