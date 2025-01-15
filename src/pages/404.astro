@@ -1,13 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import ContactForm from "../components/Link";
-import { getHomepage } from "../utils/sanity";
-import { PortableText } from "astro-portabletext";
 import "../globals.css";
-import Marquee from "../components/Marquee.astro";
-const homepage = await getHomepage();
-console.log(homepage.subnetSection.cards[0].link);
 ---
 
 <Layout>
