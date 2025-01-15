@@ -16,7 +16,7 @@ console.log(homepage.newsSection.news[0]);
     {
       homepage.heroSection && (
         <div>
-          <section class="container mx-auto px-4 md:px-8 flex flex-col md:justify-center min-h-screen py-32">
+          <section class="container mx-auto px-4 md:px-8 flex flex-col md:justify-center min-h-svh py-32">
             <div class="relative z-5 flex flex-col items-start gap-4">
               <h1 class="t-0 md:text-9xl  tracking-tighter mb-4 max-w-xl leading-[.9]">
                 {homepage.heroSection.headline}
@@ -34,7 +34,7 @@ console.log(homepage.newsSection.news[0]);
                 height={200}
                 width={200}
                 alt={homepage.heroSection.mainImage.alt ?? ""}
-                class="w-full md:w-2/3 h-1/2 md:h-auto object-contain object-right-bottom max-h-screen absolute bottom-0 right-0"
+                class="w-[130%] max-w-none md:w-2/3 h-1/2 md:h-auto object-contain object-right-bottom max-h-screen absolute bottom-0 right-0"
               />
             )}
           </section>
