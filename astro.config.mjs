@@ -21,4 +21,5 @@ export default defineConfig({
     react(),
   ],
   adapter: vercel(),
+  output: "static"
 });
