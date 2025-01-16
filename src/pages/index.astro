@@ -60,7 +60,11 @@ const homepage = await getHomepage();
     {homepage.subnetSection && <SectionRows data={homepage.subnetSection} />}
 
     {homepage.nftSection && <SectionTextImage data={homepage.nftSection} />}
-    {homepage.newsSection && <SectionNews data={homepage.newsSection} />}
+    {
+      homepage.newsSection && homepage.newsSection.news?.length > 0 && (
+        <SectionNews data={homepage.newsSection} />
+      )
+    }
     {
       homepage.contactSection && (
         <section
